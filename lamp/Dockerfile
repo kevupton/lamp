@@ -84,6 +84,6 @@ RUN cd /app && composer install --prefer-dist
 
 ENV DB_PASSWORD=
 
-RUN cd /app && php artisan migrate:refresh --seed && \
-    vendor/bin/phpunit --configuration phpunit.xml
+#RUN cd /app && php artisan migrate:refresh --seed && \
+#    vendor/bin/phpunit --configuration phpunit.xml
 
