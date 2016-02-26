@@ -81,10 +81,9 @@ EXPOSE 80 3306
 CMD ["/run.sh"]
 
 RUN cd /app && composer install --prefer-dist
-#
-#CMD ["/start-mysql.sh"]
-#CMD ["/start-apache2.sh"]
-#
-#RUN cd /app && php artisan migrate:refresh --seed && \
-#    vendor/bin/phpunit --configuration phpunit.xml
+
+CMD ["export DB_PASSWORD="]
+
+RUN cd /app && php artisan migrate:refresh --seed && \
+    vendor/bin/phpunit --configuration phpunit.xml
 
