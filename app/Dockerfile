@@ -18,6 +18,6 @@ CMD ["/run.sh"]
 RUN rm -rf /app && git clone git@git.mevu.gg:rearch/application-api.git /app && \
     cd /app && composer install --prefer-dist && \
     php artisan vendor:publish && \
-    php artisan migrate:refresh --seed && \
+    php artisan migrate:refresh --seed
 
 CMD ["phpunit --configuration phpunit.xml"]
