@@ -1,22 +1,8 @@
 FROM ubuntu:trusty
 MAINTAINER Fernando Mayo <fernando@tutum.co>, Feng Honglin <hfeng@tutum.co>
 
-ENV APP_ENV unit_test
-ENV APP_DEBUG true
-ENV APP_KEY sigLQLxJI6A9aPEGLt9Ms3H6LLbsFZ3j
-ENV APP_HTTP_HOST api.mevu.dev
-
-ENV DB_HOST localhost
-ENV DB_DATABASE application_api
-ENV DB_USERNAME root
-
-ENV CACHE_DRIVER file
-ENV SESSION_DRIVER file
-ENV QUEUE_DRIVER sync
-
-ENV MAIL_DRIVER smtp
-ENV MAIL_HOST mailtrap.io
-ENV MAIL_PORT 2525
+ENV APP_ENV ubuntu_tester
+ENV APP_HTTP_HOST localhost
 
 # Install packages
 ENV DEBIAN_FRONTEND noninteractive
@@ -58,32 +44,5 @@ ENV PHP_POST_MAX_SIZE 10M
 # Add volumes for MySQL 
 VOLUME  ["/etc/mysql", "/var/lib/mysql" ]
 
-#EXPOSE 80 3306
-#CMD ["/run.sh"]
-
-# NEW STUF ---------------------------------------------------------
-
-# Make ssh dir
-RUN rm -rf /root/.ssh && mkdir /root/.ssh/
-
-# Copy over private key, and set permissions
-ADD id_rsa /root/.ssh/id_rsa
-
-# Create known_hosts
-RUN touch /root/.ssh/known_hosts
-# Add bitbuckets key
-RUN ssh-keyscan git.mevu.gg >> /root/.ssh/known_hosts
-
-# Clone the conf files into the docker container
-RUN rm -rf /app && git clone git@git.mevu.gg:rearch/application-api.git /app
-
 EXPOSE 80 3306
 CMD ["/run.sh"]
-
-RUN cd /app && composer install --prefer-dist
-
-ENV DB_PASSWORD=
-
-#RUN cd /app && php artisan migrate:refresh --seed && \
-#    vendor/bin/phpunit --configuration phpunit.xml
-
