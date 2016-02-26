@@ -16,8 +16,6 @@ CMD ["/run.sh"]
 
 # Clone the conf files into the docker container
 RUN rm -rf /app && git clone git@git.mevu.gg:rearch/application-api.git /app && \
-    cd /app && composer install --prefer-dist && \
-    php artisan vendor:publish && \
-    php artisan migrate:refresh --seed
+    cd /app && composer install --prefer-dist
 
-CMD ["phpunit --configuration phpunit.xml"]
+CMD ["php artisan vendor:publish && php artisan migrate:refresh --seed && phpunit --configuration phpunit.xml"]
