@@ -19,6 +19,9 @@ CMD ["/run.sh"]
 
 RUN cd /app && composer install --prefer-dist
 
+CMD ["/start-mysqld.sh"]
+CMD ["/start-apache2.sh"]
+
 ENV APP_ENV unit_test
 ENV APP_DEBUG true
 ENV APP_KEY sigLQLxJI6A9aPEGLt9Ms3H6LLbsFZ3j
