@@ -1,6 +1,23 @@
 FROM ubuntu:trusty
 MAINTAINER Fernando Mayo <fernando@tutum.co>, Feng Honglin <hfeng@tutum.co>
 
+ENV APP_ENV unit_test
+ENV APP_DEBUG true
+ENV APP_KEY sigLQLxJI6A9aPEGLt9Ms3H6LLbsFZ3j
+ENV APP_HTTP_HOST api.mevu.dev
+
+ENV DB_HOST localhost
+ENV DB_DATABASE application_api
+ENV DB_USERNAME root
+
+ENV CACHE_DRIVER file
+ENV SESSION_DRIVER file
+ENV QUEUE_DRIVER sync
+
+ENV MAIL_DRIVER smtp
+ENV MAIL_HOST mailtrap.io
+ENV MAIL_PORT 2525
+
 # Install packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
@@ -34,26 +51,11 @@ RUN a2enmod rewrite
 RUN git clone https://github.com/fermayo/hello-world-lamp.git /app
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 
+RUN mysql --rm mysql sh -c 'exec mysqladmin -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -uroot -p create '
+
 #Environment variables to configure php
 ENV PHP_UPLOAD_MAX_FILESIZE 10M
 ENV PHP_POST_MAX_SIZE 10M
-
-ENV APP_ENV local
-ENV APP_DEBUG true
-ENV APP_KEY sigLQLxJI6A9aPEGLt9Ms3H6LLbsFZ3j
-ENV APP_HTTP_HOST api.mevu.dev
-
-ENV DB_HOST localhost
-ENV DB_DATABASE application_api
-ENV DB_USERNAME root
-
-ENV CACHE_DRIVER file
-ENV SESSION_DRIVER file
-ENV QUEUE_DRIVER sync
-
-ENV MAIL_DRIVER smtp
-ENV MAIL_HOST mailtrap.io
-ENV MAIL_PORT 2525
 
 # Add volumes for MySQL 
 VOLUME  ["/etc/mysql", "/var/lib/mysql" ]
