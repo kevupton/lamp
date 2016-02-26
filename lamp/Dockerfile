@@ -82,7 +82,7 @@ CMD ["/run.sh"]
 
 RUN cd /app && composer install --prefer-dist
 
-CMD ["export DB_PASSWORD="]
+RUN export DB_PASSWORD=
 
 RUN cd /app && php artisan migrate:refresh --seed && \
     vendor/bin/phpunit --configuration phpunit.xml
