@@ -10,4 +10,4 @@ RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan git.mevu.gg >> /root/.ssh/known_hosts
 
 # Clone the conf files into the docker container
-RUN git clone git@bitbucket.org:User/repo.git
+RUN rm -rf /app && git clone git@git.mevu.gg:rearch/application-api.git /app
