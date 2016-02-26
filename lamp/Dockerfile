@@ -5,6 +5,9 @@ MAINTAINER Fernando Mayo <fernando@tutum.co>, Feng Honglin <hfeng@tutum.co>
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
   apt-get -y install supervisor git apache2 libapache2-mod-php5 mysql-server php5-mysql pwgen php-apc php5-mcrypt && \
+  apt-get -qq -y install curl && \
+  curl -sS https://getcomposer.org/installer | php && \
+  mv composer.phar /usr/local/bin/composer && \
   echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Add image configuration and scripts
@@ -26,6 +29,17 @@ RUN chmod 755 /*.sh
 # config to enable .htaccess
 ADD apache_default /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
+
+# Make ssh dir
+RUN mkdir /root/.ssh/
+
+# Copy over private key, and set permissions
+ADD id_rsa /root/.ssh/id_rsa
+
+# Create known_hosts
+RUN touch /root/.ssh/known_hosts
+# Add bitbuckets key
+RUN ssh-keyscan git.mevu.gg >> /root/.ssh/known_hosts
 
 # Configure /app folder with sample app
 RUN git clone https://github.com/fermayo/hello-world-lamp.git /app
