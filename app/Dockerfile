@@ -20,4 +20,4 @@ CMD ["/run.sh"]
 RUN cd /app && composer install --prefer-dist && \
     php artisan vendor:publish && \
     php artisan migrate:refresh --seed && \
-    phpunit --configuration phpunit.xml
+    vendor/bin/phpunit --configuration phpunit.xml
