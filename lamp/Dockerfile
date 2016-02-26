@@ -46,7 +46,6 @@ ENV APP_HTTP_HOST api.mevu.dev
 ENV DB_HOST localhost
 ENV DB_DATABASE application_api
 ENV DB_USERNAME root
-ENV DB_PASSWORD
 
 ENV CACHE_DRIVER file
 ENV SESSION_DRIVER file
@@ -55,9 +54,6 @@ ENV QUEUE_DRIVER sync
 ENV MAIL_DRIVER smtp
 ENV MAIL_HOST mailtrap.io
 ENV MAIL_PORT 2525
-ENV MAIL_USERNAME null
-ENV MAIL_PASSWORD null
-ENV MAIL_ENCRYPTION null
 
 # Add volumes for MySQL 
 VOLUME  ["/etc/mysql", "/var/lib/mysql" ]
