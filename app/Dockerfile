@@ -38,6 +38,9 @@ ENV MAIL_DRIVER smtp
 ENV MAIL_HOST mailtrap.io
 ENV MAIL_PORT 2525
 
-CMD ["cd /app && php artisan migrate:refresh --seed && vendor/bin/phpunit --configuration phpunit.xml"]
+ADD scripts.sh /scripts.sh
+RUN chmod 755 /scripts.sh
+
+CMD ["/scripts.sh"]
 
 
