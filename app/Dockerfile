@@ -38,9 +38,7 @@ ENV MAIL_DRIVER smtp
 ENV MAIL_HOST mailtrap.io
 ENV MAIL_PORT 2525
 
-ADD scripts.sh /scripts.sh
-RUN chmod 755 /scripts.sh
-
-#CMD ["/scripts.sh"]
+ADD scripts.sh /phpunit
+RUN chmod 755 /phpunit
 
 
