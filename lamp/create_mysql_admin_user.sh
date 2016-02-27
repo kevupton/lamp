@@ -19,7 +19,7 @@ mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION"
 
 # You can create a /mysql-setup.sh file to intialized the DB
 if [ -f /mysql-setup.sh ] ; then
-  /mysql-setup.sh
+  . /mysql-setup.sh
 fi
 
 echo "=> Done!"
