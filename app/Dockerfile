@@ -41,6 +41,6 @@ ENV MAIL_PORT 2525
 ADD scripts.sh /scripts.sh
 RUN chmod 755 /scripts.sh
 
-CMD ["/scripts.sh"]
+#CMD ["/scripts.sh"]
 
 
