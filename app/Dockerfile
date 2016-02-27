@@ -38,7 +38,7 @@ ENV MAIL_DRIVER smtp
 ENV MAIL_HOST mailtrap.io
 ENV MAIL_PORT 2525
 
-#RUN cd /app && php artisan migrate:refresh --seed
+RUN cd /app && php artisan migrate:refresh --seed
 #
 #RUN vendor/bin/phpunit --configuration phpunit.xml
 
