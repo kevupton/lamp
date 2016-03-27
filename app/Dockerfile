@@ -19,7 +19,8 @@ RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan git.mevu.gg >> /root/.ssh/known_hosts
 
 # Clone the conf files into the docker container
-RUN rm -rf /mevuio && git clone git@git.mevu.gg:general/mevu-io.git /mevuio  && rm -fr /var/www/html && ln -s /mevuio /var/www/html
+RUN rm -rf /mevuio && git clone git@git.mevu.gg:general/mevu-io.git /mevuio
+RUN rm -fr /var/www/html && ln -s /mevuio /var/www/html
 RUN cd /mevuio && npm install
 
 EXPOSE 80 3306
