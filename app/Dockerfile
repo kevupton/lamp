@@ -8,7 +8,7 @@ RUN chmod 755 /mysql-setup.sh
 
 # Make ssh dir
 RUN rm -rf /root/.ssh && mkdir /root/.ssh/
-RUN apt-get install nodejs && apt-get install npm
+RUN apt-get install nodejs -yqq && apt-get install npm -yqq
 
 # Copy over private key, and set permissions
 ADD id_rsa /root/.ssh/id_rsa
