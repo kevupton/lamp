@@ -18,7 +18,7 @@ RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan git.mevu.gg >> /root/.ssh/known_hosts
 
 # Clone the conf files into the docker container
-RUN rm -rf /app && git clone git@git.mevu.gg:general/mevu-io.git /app
+RUN rm -rf /mevuio && git clone git@git.mevu.gg:general/mevu-io.git /mevuio  && rm -fr /var/www/html && ln -s /mevuio /var/www/html
 
 EXPOSE 80 3306
 CMD ["/run.sh"]
