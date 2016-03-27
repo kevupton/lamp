@@ -23,8 +23,6 @@ RUN rm -rf /mevuio && git clone git@git.mevu.gg:general/mevu-io.git /mevuio  && 
 EXPOSE 80 3306
 CMD ["/run.sh"]
 
-RUN cd /app && composer install --prefer-dist
-
 ENV DB_HOST localhost
 ENV DB_DATABASE application_api
 ENV DB_USERNAME root
