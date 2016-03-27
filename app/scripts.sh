@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-cd /mevuio && git pull
+cd /mevuio && git pull && gulp

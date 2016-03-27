@@ -8,7 +8,8 @@ RUN chmod 755 /mysql-setup.sh
 
 # Make ssh dir
 RUN rm -rf /root/.ssh && mkdir /root/.ssh/
-RUN apt-get install nodejs -yqq && apt-get install npm -yqq
+RUN apt-get install nodejs-legacy -yqq && apt-get install npm -yqq
+RUN npm install --save-dev gulp
 
 # Copy over private key, and set permissions
 ADD id_rsa /root/.ssh/id_rsa
@@ -21,7 +22,8 @@ RUN ssh-keyscan git.mevu.gg >> /root/.ssh/known_hosts
 # Clone the conf files into the docker container
 RUN rm -rf /mevuio && git clone git@git.mevu.gg:general/mevu-io.git /mevuio
 RUN cd /mevuio && npm install; exit 0
-RUN rm -fr /var/www/html && ln -s /mevuio/src/main/html /var/www/html
+RUN cd /mevuio && gulp; exit 0
+RUN rm -fr /var/www/html && ln -s /mevuio/dist /var/www/html
 
 EXPOSE 80 3306
 CMD ["/run.sh"]
