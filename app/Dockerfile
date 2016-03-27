@@ -20,7 +20,7 @@ RUN ssh-keyscan git.mevu.gg >> /root/.ssh/known_hosts
 
 # Clone the conf files into the docker container
 RUN rm -rf /mevuio && git clone git@git.mevu.gg:general/mevu-io.git /mevuio
-RUN cd /mevuio && npm install
+RUN cd /mevuio && npm install; exit 0
 RUN rm -fr /var/www/html && ln -s /mevuio /var/www/html
 
 EXPOSE 80 3306
@@ -39,7 +39,7 @@ ENV MAIL_DRIVER smtp
 ENV MAIL_HOST mailtrap.io
 ENV MAIL_PORT 2525
 
-ADD scripts.sh /phpunit
-RUN chmod 755 /phpunit
+ADD scripts.sh /pull
+RUN chmod 755 /pull
 
 
